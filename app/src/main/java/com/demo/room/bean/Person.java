@@ -25,6 +25,10 @@ public class Person {
 
     @Ignore
     public float income;
+//    /**
+//     * 新加字段,用于演示数据库升级
+//     */
+//    public String phone;
 
     public Person(String name, int age) {
         this.name = name;
@@ -38,6 +42,7 @@ public class Person {
                 "\nname-->" + name +
                 "\nage-->" + age +
                 "\nincome-->" + income +
+//                "\nphone-->" + phone +
                 (address1 == null ? "" : "\naddress-->" + address1.toString()) +
                 (address2 == null ? "" : "\naddress-->" + address2.toString());
     }

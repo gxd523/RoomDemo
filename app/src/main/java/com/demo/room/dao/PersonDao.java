@@ -1,6 +1,7 @@
 package com.demo.room.dao;
 
 import com.demo.room.bean.Person;
+import com.demo.room.bean.PersonAndClothes;
 
 import java.util.List;
 
@@ -46,4 +47,7 @@ public abstract class PersonDao implements BaseDao<Person> {
         deleteAll1();
         insert1(person);
     }
+
+    @Query("SELECT * FROM t_person")
+    public abstract Single<List<PersonAndClothes>> getPersonAndRelatedClothes();
 }

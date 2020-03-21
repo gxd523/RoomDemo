@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="添加Person"
-            android:textSize="22sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -65,9 +65,19 @@
             android:id="@+id/person_transaction_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Person事务"
-            android:textSize="22sp"
+            android:text="Transaction"
+            android:textSize="18sp"
             app:layout_constraintLeft_toRightOf="@id/add_person_btn"
+            app:layout_constraintRight_toLeftOf="@id/person_relation_btn"
+            app:layout_constraintTop_toTopOf="@id/add_person_btn" />
+
+        <Button
+            android:id="@+id/person_relation_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Relation"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toRightOf="@id/person_transaction_btn"
             app:layout_constraintRight_toLeftOf="@id/add_clothes_btn"
             app:layout_constraintTop_toTopOf="@id/add_person_btn" />
 
@@ -76,8 +86,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="添加Clothes"
-            android:textSize="22sp"
-            app:layout_constraintLeft_toRightOf="@id/person_transaction_btn"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toRightOf="@id/person_relation_btn"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/person_transaction_btn" />
     </androidx.constraintlayout.widget.ConstraintLayout>

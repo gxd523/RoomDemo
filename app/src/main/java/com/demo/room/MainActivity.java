@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.demo.room.bean.Clothes;
 import com.demo.room.bean.Person;
+import com.demo.room.bean.PersonAndClothes;
 import com.demo.room.dao.ClothesDao;
 import com.demo.room.dao.PersonDao;
 import com.demo.room.databinding.ActivityMainBinding;
@@ -17,6 +18,7 @@ import androidx.databinding.DataBindingUtil;
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
 import io.reactivex.Observer;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -144,6 +146,29 @@ public class MainActivity extends Activity {
                                        @Override
                                        public void onComplete() {
                                            Log.d("gxd", "clothesDao-->成功插入一条数据");
+                                       }
+
+                                       @Override
+                                       public void onError(Throwable e) {
+                                       }
+                                   }
+                        )
+        );
+
+        dataBinding.personRelationBtn.setOnClickListener(v ->
+                personDao.getPersonAndRelatedClothes()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new SingleObserver<List<PersonAndClothes>>() {
+                                       @Override
+                                       public void onSubscribe(Disposable d) {
+                                       }
+
+                                       @Override
+                                       public void onSuccess(List<PersonAndClothes> personAndClothesList) {
+                                           for (PersonAndClothes personAndClothes : personAndClothesList) {
+                                               Log.d("gxd", personAndClothes.person.name + "..." + personAndClothes.clothesList.toString());
+                                           }
                                        }
 
                                        @Override

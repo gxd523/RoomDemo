@@ -10,6 +10,9 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 
 @Dao
 public interface PersonDao {
@@ -22,38 +25,38 @@ public interface PersonDao {
      * OnConflictStrategy.IGNORE:忽略冲突
      */
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    void insert(Person... persons);
+    Completable insert(Person... persons);
 
     @Query("DELETE FROM t_person")
-    void deleteAll();
+    Completable deleteAll();
 
     /**
      * 一次删除单条数据或多条
      */
     @Delete
-    void delete(Person... persons);
+    Completable delete(Person... persons);
 
     /**
      * 一次更新单条数据或多条
      */
     @Update
-    void update(Person... persons);
+    Completable update(Person... persons);
 
     @Query("SELECT * FROM t_person")
-    List<Person> getAll();
+    Observable<List<Person>> getAll();
 
     @Query("SELECT * FROM t_person WHERE p_id= :pid")
-    Person getPersonByPid(int pid);
+    Single<Person> getPersonByPid(int pid);
 
     /**
      * 一次查找多个数据
      */
     @Query("SELECT * FROM t_person WHERE p_id IN (:pidList)")
-    List<Person> getPersonListByPids(List<Integer> pidList);
+    Single<List<Person>> getPersonListByPids(List<Integer> pidList);
 
     /**
      * 多个条件查找
      */
     @Query("SELECT * FROM t_person WHERE name = :name AND age = :age")
-    Person getPersonByMultiCondition(String name, int age);
+    Single<Person> getPersonByMultiCondition(String name, int age);
 }

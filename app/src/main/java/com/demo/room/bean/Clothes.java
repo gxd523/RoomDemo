@@ -37,9 +37,9 @@ public class Clothes {
     @NonNull
     @Override
     public String toString() {
-        return " \nclothes-----------\nbrand-->" + brand +
-                "\ncolor-->" + color +
-                "\nsize-->" + size +
-                "\nfatherId-->" + fatherId;
+        return "[" + brand + ", " +
+                color + ", " +
+                size + ", " +
+                fatherId + "]";
     }
 }

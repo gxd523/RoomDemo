@@ -16,7 +16,7 @@ public class MyDataBaseManager {
      */
     private static final String DB_NAME = new File(MyApplication.instance.getExternalFilesDir(null), "room_test.db").getAbsolutePath();
     public static MyDataBase dataBase = Room.databaseBuilder(MyApplication.instance, MyDataBase.class, DB_NAME)
-            .allowMainThreadQueries()// 允许主线程进行数据库操作,仅为Demo方便展示使用
+//            .allowMainThreadQueries()// 允许主线程进行数据库操作,仅为Demo方便展示使用
             .addMigrations(MyDataBase.MIGRATION_1_2)
             .build();
 }

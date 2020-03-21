@@ -38,13 +38,12 @@ public class Person {
     @NonNull
     @Override
     public String toString() {
-        return " \nperson-----------\npid-->" + pid +
-                "\nname-->" + name +
-                "\nage-->" + age +
-                "\nincome-->" + income +
-//                "\nphone-->" + phone +
-                (address1 == null ? "" : "\naddress-->" + address1.toString()) +
-                (address2 == null ? "" : "\naddress-->" + address2.toString());
+        return "[" + pid + ", " +
+                name + ", " +
+                age + "岁, " +
+                income + "元" +
+                (address1 == null ? ", " : address1.toString()) +
+                (address2 == null ? ", " : address2.toString()) + "]";
     }
 
     public static class Address {
@@ -59,8 +58,7 @@ public class Person {
         @NonNull
         @Override
         public String toString() {
-            return "\n\t\taddress-----------\n\t\tcity-->" + city +
-                    "\n\t\tstreet-->" + street;
+            return ", " + city + ", " + street;
         }
     }
 }

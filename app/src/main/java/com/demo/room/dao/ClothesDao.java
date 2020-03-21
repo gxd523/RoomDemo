@@ -8,6 +8,8 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
 
 /**
  * Created by guoxiaodong on 2020/3/19 10:23
@@ -18,11 +20,11 @@ public interface ClothesDao {
      * 一次插入单条数据或多条
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Clothes... clothes);
+    Completable insert(Clothes... clothes);
 
     @Query("DELETE FROM Clothes")
-    void deleteAll();
+    Completable deleteAll();
 
     @Query("SELECT * FROM Clothes")
-    List<Clothes> getAll();
+    Observable<List<Clothes>> getAll();
 }

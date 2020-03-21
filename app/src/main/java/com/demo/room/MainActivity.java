@@ -14,6 +14,7 @@ import com.demo.room.manager.MyDataBaseManager;
 import java.util.List;
 
 import androidx.databinding.DataBindingUtil;
+import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -106,7 +107,29 @@ public class MainActivity extends Activity {
                                }
                     );
         });
+        dataBinding.personTransactionBtn.setOnClickListener(v -> {
+                    Person gxt = new Person("gxt", 22);
+                    Completable.fromCallable(() -> {
+                        personDao.deleteAllAndInsert(gxt);
+                        return true;
+                    }).subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new CompletableObserver() {
+                                @Override
+                                public void onSubscribe(Disposable d) {
+                                }
 
+                                @Override
+                                public void onComplete() {
+                                    Log.d("gxd", "personDao-->成功删除全部数据再插入一条数据");
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+                                }
+                            });
+                }
+        );
         dataBinding.addClothesBtn.setOnClickListener(v ->
                 personDao.getPersonByMultiCondition("gxd", 25)
                         .subscribeOn(Schedulers.io())

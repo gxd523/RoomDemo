@@ -15,7 +15,7 @@ import io.reactivex.Observable;
  * Created by guoxiaodong on 2020/3/19 10:23
  */
 @Dao
-public interface ClothesDao {
+public interface ClothesDao extends BaseDao<Clothes> {
     /**
      * 一次插入单条数据或多条
      */

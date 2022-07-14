@@ -1,11 +1,11 @@
 package com.demo.room.manager;
 
+import androidx.room.Room;
+
 import com.demo.room.MyApplication;
 import com.demo.room.database.MyDataBase;
 
 import java.io.File;
-
-import androidx.room.Room;
 
 /**
  * Created by guoxiaodong on 2020/3/18 17:09

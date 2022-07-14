@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.databinding.DataBindingUtil;
+
 import com.demo.room.bean.Clothes;
 import com.demo.room.bean.Person;
 import com.demo.room.bean.PersonAndClothes;
@@ -14,7 +16,6 @@ import com.demo.room.manager.MyDataBaseManager;
 
 import java.util.List;
 
-import androidx.databinding.DataBindingUtil;
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
 import io.reactivex.Observer;
@@ -112,9 +113,9 @@ public class MainActivity extends Activity {
         dataBinding.personTransactionBtn.setOnClickListener(v -> {
                     Person gxt = new Person("gxt", 22);
                     Completable.fromCallable(() -> {
-                        personDao.deleteAllAndInsert(gxt);
-                        return true;
-                    }).subscribeOn(Schedulers.io())
+                                personDao.deleteAllAndInsert(gxt);
+                                return true;
+                            }).subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(new CompletableObserver() {
                                 @Override

@@ -1,14 +1,15 @@
 package com.demo.room.dao;
 
+import androidx.room.Dao;
+import androidx.room.Insert;
+import androidx.room.Query;
+import androidx.room.Transaction;
+
 import com.demo.room.bean.Person;
 import com.demo.room.bean.PersonAndClothes;
 
 import java.util.List;
 
-import androidx.room.Dao;
-import androidx.room.Insert;
-import androidx.room.Query;
-import androidx.room.Transaction;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;

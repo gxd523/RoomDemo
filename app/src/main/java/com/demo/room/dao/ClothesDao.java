@@ -1,13 +1,14 @@
 package com.demo.room.dao;
 
-import com.demo.room.bean.Clothes;
-
-import java.util.List;
-
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+
+import com.demo.room.bean.Clothes;
+
+import java.util.List;
+
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 

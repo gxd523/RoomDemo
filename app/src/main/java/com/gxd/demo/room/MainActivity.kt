@@ -98,11 +98,11 @@ class MainActivity : Activity() {
                 }
 
                 override fun onComplete() {
-                    Log.d("glog", "$methodName...onComplete")
+                    Log.d("ggg", "$methodName...onComplete")
                 }
 
                 override fun onError(e: Throwable) {
-                    Log.d("glog", "$methodName...onError", e)
+                    Log.d("ggg", "$methodName...onError", e)
                 }
             })
     }
@@ -115,11 +115,11 @@ class MainActivity : Activity() {
                 }
 
                 override fun onSuccess(t: T) {
-                    Log.d("glog", "onSuccess...$t")
+                    Log.d("ggg", "onSuccess...$t")
                 }
 
                 override fun onError(e: Throwable) {
-                    Log.d("glog", "$methodName...onError", e)
+                    Log.d("ggg", "$methodName...onError", e)
                 }
             })
     }

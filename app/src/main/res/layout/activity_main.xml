@@ -48,4 +48,10 @@
         android:layout_height="wrap_content"
         android:onClick="getPersonAndClothesList"
         android:text="getPersonAndClothesList" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="getPersonFstList"
+        android:text="getPersonFstList" />
 </LinearLayout>

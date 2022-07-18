@@ -10,8 +10,8 @@ import com.gxd.demo.room.table.Clothes
 import com.gxd.demo.room.table.Person
 import io.reactivex.Completable
 import io.reactivex.CompletableObserver
-import io.reactivex.Observable
-import io.reactivex.Observer
+import io.reactivex.Single
+import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -26,7 +26,7 @@ class MainActivity : Activity() {
     }
 
     fun addPerson(view: View) {
-        personDao.insert(
+        personDao.insertRx(
             Person(
                 name = "aaa",
                 age = 35,
@@ -40,8 +40,18 @@ class MainActivity : Activity() {
     }
 
     fun updatePerson(view: View) {
-        Person(id = 1, name = "xxxx", age = 999, firstAddress = Address(country = "eee"))
-            .let(personDao::update).doSubscribe("updatePerson")
+        personDao.getAll()
+            .subscribeOn(Schedulers.io())
+            .filter { it.isNotEmpty() }
+            .toSingle()
+            .flatMap { personList ->
+                val randomIndex = personList.indices.random()
+                val personId = personList[randomIndex].id
+                Person(
+                    id = personId, name = "xxxx", age = 999, firstAddress = Address(country = "eee")
+                ).let(personDao::update)
+            }
+            .doSubscribe("updatePerson")
     }
 
     fun getPersonMinimal(view: View) {
@@ -60,15 +70,24 @@ class MainActivity : Activity() {
     }
 
     fun addClothes(view: View) {
-        val personList = emptyList<Clothes>().toMutableList()
-        repeat(5) { index ->
-            personList += Clothes("gxg-$index", "yellow-$index", 4, "L")
-        }
-        clothesDao.insertRx(personList).doSubscribe("addClothes")
+        personDao.getAll()
+            .subscribeOn(Schedulers.io())
+            .flatMap { personList ->
+                val randomIndex = personList.indices.random()
+                val ownerId = personList[randomIndex].id
+                Clothes(
+                    "gxg-$randomIndex", "yellow-$randomIndex", ownerId, "L"
+                ).let(clothesDao::insertRx)
+            }
+            .doSubscribe("addClothes")
     }
 
     fun getPersonAndClothesList(view: View) {
         personDao.getPersonAndClothesList().doSubscribe("getPersonAndClothesList")
+    }
+
+    fun getPersonFstList(view: View) {
+//        personDao.search("gxd")
     }
 
     private fun Completable.doSubscribe(methodName: String) {
@@ -88,19 +107,15 @@ class MainActivity : Activity() {
             })
     }
 
-    private fun <T : Any> Observable<T>.doSubscribe(methodName: String) {
+    private fun <T : Any> Single<T>.doSubscribe(methodName: String) {
         subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<T> {
+            .subscribe(object : SingleObserver<T> {
                 override fun onSubscribe(d: Disposable) {
                 }
 
-                override fun onNext(t: T) {
-                    Log.d("glog", "MainActivity.onNext...$t")
-                }
-
-                override fun onComplete() {
-                    Log.d("glog", "$methodName...onComplete")
+                override fun onSuccess(t: T) {
+                    Log.d("glog", "onSuccess...$t")
                 }
 
                 override fun onError(e: Throwable) {

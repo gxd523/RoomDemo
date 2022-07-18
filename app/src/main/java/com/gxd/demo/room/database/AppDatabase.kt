@@ -34,7 +34,7 @@ abstract class AppDatabase : RoomDatabase() {
         ).addCallback(object : Callback() {
             override fun onCreate(db: SupportSQLiteDatabase) {// 当数据库第一次被创建时调用此方法
                 ioThread {
-                    getInstance(context).personDao().insert(PREPOPULATE_DATA)// 预填充数据,插入真数据之后貌似回清除预填充数据
+                    getInstance(context).personDao().insert(PREPOPULATE_DATA)
                 }
             }
 

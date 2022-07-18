@@ -2,11 +2,12 @@ package com.gxd.demo.room.dao
 
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Update
 import io.reactivex.Single
 
 interface BaseDao<T> {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(obj: T): Long
 
     @Insert

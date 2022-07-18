@@ -28,8 +28,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="getPersonMinimal"
-        android:text="getPersonMinimal" />
+        android:onClick="queryPersonMinimal"
+        android:text="queryPersonMinimal" />
 
     <Button
         android:layout_width="match_parent"
@@ -46,12 +46,24 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="getPersonAndClothesList"
-        android:text="getPersonAndClothesList" />
+        android:onClick="queryPersonAndClothesList"
+        android:text="queryPersonAndClothesList" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="getPersonFstList"
-        android:text="getPersonFstList" />
+        android:onClick="queryPersonFstList"
+        android:text="queryPersonFstList" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="queryIntermediateData"
+        android:text="queryIntermediateData" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="queryMultimapData"
+        android:text="queryMultimapData" />
 </LinearLayout>

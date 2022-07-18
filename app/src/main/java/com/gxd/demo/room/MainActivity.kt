@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import com.gxd.demo.room.data.Color.Companion.randomColor
 import com.gxd.demo.room.database.AppDatabase
 import com.gxd.demo.room.table.Address
 import com.gxd.demo.room.table.Clothes
@@ -40,7 +41,7 @@ class MainActivity : Activity() {
     }
 
     fun updatePerson(view: View) {
-        personDao.getAll()
+        personDao.queryAll()
             .subscribeOn(Schedulers.io())
             .filter { it.isNotEmpty() }
             .toSingle()
@@ -54,8 +55,8 @@ class MainActivity : Activity() {
             .doSubscribe("updatePerson")
     }
 
-    fun getPersonMinimal(view: View) {
-        personDao.getPersonMinimalList().doSubscribe("getPersonMinimal")
+    fun queryPersonMinimal(view: View) {
+        personDao.queryPersonMinimalList().doSubscribe("queryPersonMinimal")
     }
 
     fun updateAllPerson(view: View) {
@@ -70,23 +71,23 @@ class MainActivity : Activity() {
     }
 
     fun addClothes(view: View) {
-        personDao.getAll()
+        personDao.queryAll()
             .subscribeOn(Schedulers.io())
             .flatMap { personList ->
                 val randomIndex = personList.indices.random()
                 val ownerId = personList[randomIndex].id
                 Clothes(
-                    "gxg-$randomIndex", "yellow-$randomIndex", ownerId, "L"
+                    "gxg-$randomIndex", "${randomColor()}-$randomIndex", ownerId, "L"
                 ).let(clothesDao::insertRx)
             }
             .doSubscribe("addClothes")
     }
 
-    fun getPersonAndClothesList(view: View) {
-        personDao.getPersonAndClothesList().doSubscribe("getPersonAndClothesList")
+    fun queryPersonAndClothesList(view: View) {
+        personDao.queryPersonAndClothesList().doSubscribe("queryPersonAndClothesList")
     }
 
-    fun getPersonFstList(view: View) {
+    fun queryPersonFstList(view: View) {
 //        personDao.search("gxd")
     }
 
@@ -122,5 +123,13 @@ class MainActivity : Activity() {
                     Log.d("ggg", "$methodName...onError", e)
                 }
             })
+    }
+
+    fun queryIntermediateData(view: View) {
+        personDao.queryIntermediateData().doSubscribe("queryIntermediateData")
+    }
+
+    fun queryMultimapData(view: View) {
+        personDao.queryMultimapData().doSubscribe("queryMultimapData")
     }
 }

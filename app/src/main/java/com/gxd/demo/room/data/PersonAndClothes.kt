@@ -1,8 +1,10 @@
-package com.gxd.demo.room.table
+package com.gxd.demo.room.data
 
 import androidx.room.Embedded
 import androidx.room.Ignore
 import androidx.room.Relation
+import com.gxd.demo.room.table.Clothes
+import com.gxd.demo.room.table.Person
 
 data class PersonAndClothes
 constructor(

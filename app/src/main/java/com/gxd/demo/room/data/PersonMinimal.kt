@@ -1,4 +1,4 @@
-package com.gxd.demo.room.table
+package com.gxd.demo.room.data
 
 import androidx.room.ColumnInfo
 

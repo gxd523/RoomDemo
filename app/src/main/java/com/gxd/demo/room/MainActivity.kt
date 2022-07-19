@@ -3,7 +3,6 @@ package com.gxd.demo.room
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import com.gxd.demo.room.data.Color.Companion.randomColor
 import com.gxd.demo.room.database.AppDatabase
 import com.gxd.demo.room.table.Address
@@ -26,7 +25,7 @@ class MainActivity : Activity() {
         setContentView(R.layout.activity_main)
     }
 
-    fun addPerson(view: View) {
+    fun addPerson() {
         personDao.insertRx(
             Person(
                 name = "aaa",
@@ -36,11 +35,11 @@ class MainActivity : Activity() {
         ).doSubscribe("addPerson")
     }
 
-    fun deleteAllPerson(view: View) {
+    fun deleteAllPerson() {
         personDao.deleteAllRx().doSubscribe("deleteAllPerson")
     }
 
-    fun updatePerson(view: View) {
+    fun updatePerson() {
         personDao.queryAll()
             .subscribeOn(Schedulers.io())
             .filter { it.isNotEmpty() }
@@ -55,11 +54,11 @@ class MainActivity : Activity() {
             .doSubscribe("updatePerson")
     }
 
-    fun queryPersonMinimal(view: View) {
+    fun queryPersonMinimal() {
         personDao.queryPersonMinimalList().doSubscribe("queryPersonMinimal")
     }
 
-    fun updateAllPerson(view: View) {
+    fun updateAllPerson() {
         val personList = emptyList<Person>().toMutableList()
         repeat(5) { index ->
             personList += Person(name = "person-$index", age = 30 + index, firstAddress = Address(country = "address-$index"))
@@ -70,7 +69,7 @@ class MainActivity : Activity() {
         }.doSubscribe("updateAllPerson")
     }
 
-    fun addClothes(view: View) {
+    fun addClothes() {
         personDao.queryAll()
             .subscribeOn(Schedulers.io())
             .flatMap { personList ->
@@ -83,11 +82,11 @@ class MainActivity : Activity() {
             .doSubscribe("addClothes")
     }
 
-    fun queryPersonAndClothesList(view: View) {
+    fun queryPersonAndClothesList() {
         personDao.queryPersonAndClothesList().doSubscribe("queryPersonAndClothesList")
     }
 
-    fun queryPersonFstList(view: View) {
+    fun queryPersonFstList() {
 //        personDao.search("gxd")
     }
 
@@ -125,11 +124,11 @@ class MainActivity : Activity() {
             })
     }
 
-    fun queryIntermediateData(view: View) {
+    fun queryIntermediateData() {
         personDao.queryIntermediateData().doSubscribe("queryIntermediateData")
     }
 
-    fun queryMultimapData(view: View) {
+    fun queryMultimapData() {
         personDao.queryMultimapData().doSubscribe("queryMultimapData")
     }
 }

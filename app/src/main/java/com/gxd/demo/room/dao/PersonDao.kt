@@ -43,6 +43,7 @@ interface PersonDao : BaseDao<Person> {
         insert(personList)
     }
 
+    @Transaction
     @Query("SELECT * FROM t_person")
     fun queryPersonAndClothesList(): Single<List<PersonAndClothes>>
 
